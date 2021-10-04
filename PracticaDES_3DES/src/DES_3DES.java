@@ -64,11 +64,13 @@ public class DES_3DES {
         private String myEncryptionScheme;
         SecretKey key;
         private static File Arch = null;
+        public static  int size_key = 0;
 
-        public TrippleDes() {
+        public TrippleDes(int size_key) {
+            this.size_key = size_key;
             try {
                 SecureRandom random = new SecureRandom();
-                random.setSeed(random.generateSeed(112));
+                random.setSeed(random.generateSeed(this.size_key));
                 KeyGenerator keygenerator = KeyGenerator.getInstance(DESEDE_ENCRYPTION_SCHEME); // DES EDE EDE variante a usar
                 /**
                  * Keysize must be equal to 112 or 168.
@@ -76,7 +78,7 @@ public class DES_3DES {
                     Due to the "Meet-In-The-Middle" problem, even though 112 or 168 bits of key material are used, the effective keysize is 80 or 112 bits respectively.
                  * 
                  */
-                keygenerator.init(112, random); // PAra cambiar de 3 llaves ocupamos 
+                keygenerator.init(this.size_key, random); // PAra cambiar de 3 llaves ocupamos 
                 myEncryptionKey = keygenerator.toString();
                 myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME; // DES EDE Equema a usar
                 arrayBytes = myEncryptionKey.getBytes(UNICODE_FORMAT); // UTF8
@@ -263,15 +265,11 @@ public class DES_3DES {
             logg.err(e);
         }
         // TrippleDes
-        TrippleDes td = new TrippleDes();
-        String target = "imparator";
+        TrippleDes td = new TrippleDes(168);     //168 3 key, o 2 con 112
+        
         String kb64 = "keyBase64";
-        String encrypted = td.encrypt(target, kb64);
-        String decrypted = td.decrypt(encrypted, kb64);
-        logg.log("String To Encrypt:" + target);
-        logg.log("Encrypted String:" + encrypted);
-        logg.log("Decrypted String:" + decrypted);
-        td.encryptArchivo("txtAEncriptarTest", kb64);
-        td.decryptArchivo("txtAEncriptarTest", kb64);        
+        String nombre_archivo  = "txtAEncriptarTest";
+        td.encryptArchivo(nombre_archivo, kb64);
+        td.decryptArchivo(nombre_archivo, kb64);        
     }
 }

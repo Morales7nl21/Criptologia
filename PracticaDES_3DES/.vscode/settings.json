@@ -4,9 +4,7 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\LENOVO 720\\Desktop\\IPN Documents\\8Sem\\Cripto\\Pracitcas\\jar\\commons-codec-1.15.jar",
-        "c:\\Users\\LENOVO 720\\Desktop\\IPN Documents\\8Sem\\Cripto\\Pracitcas\\jar\\commons-codec-1.15-javadoc.jar",
         "c:\\Users\\LENOVO 720\\Desktop\\IPN Documents\\8Sem\\Cripto\\Pracitcas\\jar\\commons-codec-1.15-sources.jar",
-        "c:\\Users\\LENOVO 720\\Desktop\\IPN Documents\\8Sem\\Cripto\\Pracitcas\\jar\\commons-codec-1.15-tests.jar",
         "c:\\Users\\LENOVO 720\\Desktop\\IPN Documents\\8Sem\\Cripto\\Pracitcas\\jar\\commons-codec-1.15-test-sources.jar"
     ]
 }

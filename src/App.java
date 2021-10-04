@@ -116,7 +116,9 @@ public class App {
             }
             return encryptedString;
         }
-    
+        public void encryptArchivo(String archivo_nombre){
+            
+        }
     
         public String decrypt(String encryptedString,  String nombre_archivo_key) {
             String decryptedText=null;
@@ -130,6 +132,7 @@ public class App {
                 byte[] arrbk = Base64.decodeBase64(lecturaKey);                                                
                 SecretKey ska=skf.generateSecret(new DESedeKeySpec(arrbk));               
                 cipher.init(Cipher.DECRYPT_MODE, ska);
+
                 byte[] encryptedText = Base64.decodeBase64(encryptedString);
                 byte[] plainText = cipher.doFinal(encryptedText);
                 decryptedText= new String(plainText);

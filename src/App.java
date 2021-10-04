@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 
+//https://docs.oracle.com/javase/6/docs/technotes/guides/security/SunProviders.html DOC PA LAS KEYS
 public class App {
 
     static class Permutation {

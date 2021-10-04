@@ -17,7 +17,7 @@ import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 
 //https://docs.oracle.com/javase/6/docs/technotes/guides/security/SunProviders.html DOC PA LAS KEYS
-public class App {
+public class DES_3DES {
 
     static class Permutation {
         Permutation(){}
@@ -233,7 +233,7 @@ public class App {
         int[] perm = { 0, 1, 2, 3, 4, 5, 6, 7 };
         int[] perm2 = { 7, 6, 5, 4, 3, 2, 1, 0 };
         int[] perm3 = { 7, 2, 6, 1, 5, 4, 0, 3 };
-        logger logg = new App.logger();
+        logger logg = new DES_3DES.logger();
         s = String.format("%8s", Integer.toBinaryString(b.byteValue() & 0xFF)).replace(' ', '0');
         logg.log(("Antes de la permutacion: " + s));
         logg.log("Permutaciones a usar: ");
@@ -250,9 +250,9 @@ public class App {
         }
         logg.log("");
         try {
-            Byte nb = App.Permutation.generaPermutacion(b, perm);
-            Byte nb2 = App.Permutation.generaPermutacion(b, perm2);
-            Byte nb3 = App.Permutation.generaPermutacion(b, perm3);
+            Byte nb = DES_3DES.Permutation.generaPermutacion(b, perm);
+            Byte nb2 = DES_3DES.Permutation.generaPermutacion(b, perm2);
+            Byte nb3 = DES_3DES.Permutation.generaPermutacion(b, perm3);
             s = String.format("%8s", Integer.toBinaryString(nb.byteValue() & 0xFF)).replace(' ', '0');
             logg.log("Despues de la permutacion 1:  " + s);
             s = String.format("%8s", Integer.toBinaryString(nb2.byteValue() & 0xFF)).replace(' ', '0');

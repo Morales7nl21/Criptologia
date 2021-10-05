@@ -52,7 +52,7 @@ public class DES_3DES {
             System.out.print(i);
         }
     }
-    static class TrippleDes {
+    static class DESy3DES {
 
         private static final String UNICODE_FORMAT = "UTF8";
         public static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
@@ -66,7 +66,7 @@ public class DES_3DES {
         private static File Arch = null;
         public static  int size_key = 0;
 
-        public TrippleDes(int size_key) {
+        public DESy3DES(int size_key) {
             this.size_key = size_key;
             try {
                 SecureRandom random = new SecureRandom();
@@ -264,8 +264,8 @@ public class DES_3DES {
         } catch (Exception e) {
             logg.err(e);
         }
-        // TrippleDes
-        TrippleDes td = new TrippleDes(168);     //168 3 key, o 2 con 112
+        // DESy3DES
+        DESy3DES td = new DESy3DES(168);     //168 3 key, o 2 con 112
         
         String kb64 = "keyBase64";
         String nombre_archivo  = "txtAEncriptarTest";

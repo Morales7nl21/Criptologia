@@ -34,7 +34,7 @@ public class PolynomialProduct
         {
             for(int j = 0; j < gx.length(); j++)
             {
-                individualProducts[i] += Math.pow(2, gx.length() - 1 - j) * (fx.charAt(fx.length() - 1 - i) - 48) * (gx.charAt(gx.length() - 1 - j) - 48); 
+                individualProducts[i] += Math.pow(2, gx.length() - 1 - j) * (fx.charAt(i) - 48) * (gx.charAt(j) - 48); 
             }
 
             individualProducts[i] = individualProducts[i] << fx.length() - 1 - i;
@@ -103,6 +103,6 @@ public class PolynomialProduct
     {
         PolynomialProduct p = new PolynomialProduct();
 
-        System.out.println(p.getModularPolynomialProduct(8, "11111111", "11111111", "100011011"));
+        System.out.println(p.getModularPolynomialProduct(3, "010", "011", "1011"));
     }
 }

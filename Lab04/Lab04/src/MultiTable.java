@@ -74,16 +74,24 @@ public class MultiTable {
         for (int i = 0; i < inverseMultiplicative[0].length-1; i++) {
             for (int j = i; j < inverseMultiplicative[0].length-1; j++) {
                 //System.out.print(inverseMultiplicative[i][j]);
-                if(inverseMultiplicative[i][j] == 1){                    
+                if(inverseMultiplicative[i][j] == 1){             
                     invmult[posInvmult] = "the inverse multiplicative of "+ String.valueOf(i+1) + " is -> " + String.valueOf(j+1);
-                    posInvmult++;
+                    posInvmult++;                                        
                 }
             }            
         }
-        for (int i = 0; i < 31; i++) {
-            System.out.println(invmult[i]);
-        }
-    
+
+        try {
+            BufferedWriter ficheroSalida = new BufferedWriter(new FileWriter(new File("inverseM.txt")));
+            ficheroSalida.write("Inverse multiplicative\n\n");
+            for (int i = 0; i < 31; i++) {
+                ficheroSalida.write(String.valueOf(invmult[i]));
+                ficheroSalida.write("\n");
+            }                
+            ficheroSalida.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }                   
     }
 
 

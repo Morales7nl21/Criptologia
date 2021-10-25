@@ -16,7 +16,7 @@ public class MultiTable {
 
         PolynomialProduct p = new PolynomialProduct();        
         MultiTable m = new MultiTable();
-
+        int[][] inverseMultiplicative = new int[64][64]; 
         /*-------THE VALUES MODIFY DEPEND OF THE MULTIPLICATION TABLE THAT WE WANT--------------*/
         
         int n = 6; //Valor de n
@@ -28,7 +28,7 @@ public class MultiTable {
         int cuadrado = (int)Math.pow( (double)base , (double)n );
         
         //We create a string array
-        String valores[] = new String[cuadrado-1];
+        String[] valores = new String[cuadrado-1];
 
         //We save all the numbers that are element of 2^n in the array valores
         for(int i = 1; i<cuadrado; i++)
@@ -58,7 +58,8 @@ public class MultiTable {
                 {
                     //We call the function that we create before with the values of the array valores
                     int res = p.getModularPolynomialProduct(n, valores[i], valores[j], mx);
-                    ficheroSalida.write(""+res+"\t");
+                    ficheroSalida.write(""+res+"\t");                    
+                    inverseMultiplicative[i][j] = res;
                 }
                 ficheroSalida.write("\n");
             }
@@ -68,8 +69,21 @@ public class MultiTable {
         }catch(IOException ex){
             System.out.println(ex.getMessage());
         }
-
-       
+        String[] invmult = new String[32];
+        int posInvmult = 0;
+        for (int i = 0; i < inverseMultiplicative[0].length-1; i++) {
+            for (int j = i; j < inverseMultiplicative[0].length-1; j++) {
+                //System.out.print(inverseMultiplicative[i][j]);
+                if(inverseMultiplicative[i][j] == 1){                    
+                    invmult[posInvmult] = "the inverse multiplicative of "+ String.valueOf(i+1) + " is -> " + String.valueOf(j+1);
+                    posInvmult++;
+                }
+            }            
+        }
+        for (int i = 0; i < 31; i++) {
+            System.out.println(invmult[i]);
+        }
+    
     }
 
 

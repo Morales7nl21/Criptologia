@@ -20,7 +20,7 @@ public class MultiTable {
         /*-------THE VALUES MODIFY DEPEND OF THE MULTIPLICATION TABLE THAT WE WANT--------------*/
         
         int n = 6; //Valor de n
-        String mx = "1000011"; //Valor m(x)
+        String mx = "10000011"; //Valor m(x)
 
         /*--------------------------------------------------------------------------------------*/
         

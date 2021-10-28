@@ -103,6 +103,6 @@ public class PolynomialProduct
     {
         PolynomialProduct p = new PolynomialProduct();
 
-        System.out.println(Integer.toHexString(p.getModularPolynomialProduct(5, "11010", "00101", "100011")));
+        System.out.println(Integer.toHexString(p.getModularPolynomialProduct(8, "11010", "00101", "100011011")));
     }
 }

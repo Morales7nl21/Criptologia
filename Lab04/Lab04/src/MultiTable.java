@@ -19,8 +19,8 @@ public class MultiTable {
         int[][] inverseMultiplicative = new int[64][64]; 
         /*-------THE VALUES MODIFY DEPEND OF THE MULTIPLICATION TABLE THAT WE WANT--------------*/
         
-        int n = 6; //Valor de n
-        String mx = "10000011"; //Valor m(x)
+        int n = 8; //Valor de n
+        String mx = "100011011"; //Valor m(x)
 
         /*--------------------------------------------------------------------------------------*/
         
@@ -62,7 +62,7 @@ public class MultiTable {
                     int res = p.getModularPolynomialProduct(n, valores[i], valores[j], mx);
                     hexa = Integer.toHexString(res);
                     ficheroSalida.write(""+hexa+"\t");                    
-                    inverseMultiplicative[i][j] = res;
+                    //inverseMultiplicative[i][j] = res;
                 }
                 ficheroSalida.write("\n");
             }
@@ -72,7 +72,7 @@ public class MultiTable {
         }catch(IOException ex){
             System.out.println(ex.getMessage());
         }
-        String[] invmult = new String[32];
+        /*String[] invmult = new String[32];
         int posInvmult = 0;
         for (int i = 0; i < inverseMultiplicative[0].length-1; i++) {
             for (int j = i; j < inverseMultiplicative[0].length-1; j++) {
@@ -96,7 +96,7 @@ public class MultiTable {
             ficheroSalida.close();
         } catch (Exception e) {
             System.out.println(e);
-        }                   
+        }     */              
     }
 
 

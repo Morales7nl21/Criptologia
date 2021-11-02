@@ -19,8 +19,8 @@ public class MultiTable {
         int[][] inverseMultiplicative = new int[64][64]; 
         /*-------THE VALUES MODIFY DEPEND OF THE MULTIPLICATION TABLE THAT WE WANT--------------*/
         
-        int n = 6; //Valor de n
-        String mx = "1000011"; //Valor m(x)
+        int n = 8; //Valor de n
+        String mx = "100011011"; //Valor m(x)
 
         /*--------------------------------------------------------------------------------------*/
         
@@ -46,20 +46,23 @@ public class MultiTable {
 
             for(int i = 0; i<cuadrado-1; i++)
             {
-                ficheroSalida.write(""+(i+1)+"\t");//We write the line from 1 to 2^n in he filetext
+                String hexa = Integer.toHexString(i+1);
+                ficheroSalida.write(""+hexa+"\t");//We write the line from 1 to 2^n in he filetext
             }
 
             ficheroSalida.write("\n");
 
             for(int i = 0; i<cuadrado-1; i++)
             {
-                ficheroSalida.write(""+(i+1)+"\t");
+                String hexa = Integer.toHexString(i+1);
+                ficheroSalida.write(""+hexa+"\t");
                 for(int j = 0; j<cuadrado-1; j++)
                 {
                     //We call the function that we create before with the values of the array valores
                     int res = p.getModularPolynomialProduct(n, valores[i], valores[j], mx);
-                    ficheroSalida.write(""+res+"\t");                    
-                    inverseMultiplicative[i][j] = res;
+                    hexa = Integer.toHexString(res);
+                    ficheroSalida.write(""+hexa+"\t");                    
+                    //inverseMultiplicative[i][j] = res;
                 }
                 ficheroSalida.write("\n");
             }
@@ -69,13 +72,15 @@ public class MultiTable {
         }catch(IOException ex){
             System.out.println(ex.getMessage());
         }
-        String[] invmult = new String[32];
+        /*String[] invmult = new String[32];
         int posInvmult = 0;
         for (int i = 0; i < inverseMultiplicative[0].length-1; i++) {
             for (int j = i; j < inverseMultiplicative[0].length-1; j++) {
                 //System.out.print(inverseMultiplicative[i][j]);
-                if(inverseMultiplicative[i][j] == 1){             
-                    invmult[posInvmult] = "the inverse multiplicative of "+ String.valueOf(i+1) + " is -> " + String.valueOf(j+1);
+                if(inverseMultiplicative[i][j] == 1){  
+                    String hexa = Integer.toHexString(i+1);
+                    String hexa1 = Integer.toHexString(j+1);           
+                    invmult[posInvmult] = "the inverse multiplicative of "+ hexa + " is -> " + hexa1;
                     posInvmult++;                                        
                 }
             }            
@@ -91,7 +96,7 @@ public class MultiTable {
             ficheroSalida.close();
         } catch (Exception e) {
             System.out.println(e);
-        }                   
+        }     */              
     }
 
 

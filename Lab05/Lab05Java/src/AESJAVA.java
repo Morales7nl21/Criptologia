@@ -3,8 +3,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Base64;
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -66,10 +69,24 @@ public class AESJAVA {
                 cipher = Cipher.getInstance(CIFRADO_MODO_PADDING3);
             else
                 cipher = Cipher.getInstance(CIFRADO_MODO_PADDING4);
+            byte[] key;
+            if(salArch == 0){
+                 key = new byte[tamKey];                                            
+                 cipher.init(Cipher.ENCRYPT_MODE,  new SecretKeySpec(key, "AES"), new IvParameterSpec(new byte[16]));            
+            }else{
+                KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+                
+                keyGenerator.init(tamKey*8);
+                SecretKey keyG = keyGenerator.generateKey();
+                System.out.println("key: \n" + Arrays.toString(keyG.getEncoded()));
+                
+                Base64.Encoder encoder64 = Base64.getEncoder();
+                String key64 = encoder64.encodeToString(keyG.getEncoded());
+                mandarArchivo(key64, "key_aes", 4);
+                cipher.init(Cipher.ENCRYPT_MODE,  keyG, new IvParameterSpec(new byte[16]));            
+            }
             
             
-            byte[] key = new byte[tamKey];                                            
-            cipher.init(Cipher.ENCRYPT_MODE,  new SecretKeySpec(key, "AES"), new IvParameterSpec(new byte[16]));            
             byte[] cipherText;
             if(salArch == 0){
                 cipherText = cipher.doFinal(cadBase16arregloBytes(plainText));                        
@@ -106,11 +123,17 @@ public class AESJAVA {
             else
                 cipher = Cipher.getInstance(CIFRADO_MODO_PADDING4);
             
-
-            byte[] key = new byte[tamKey];
-            SecretKeySpec secretKey = new SecretKeySpec(key, ALGORITMO_DE_CIFRADO);
             IvParameterSpec ivparameterspec = new IvParameterSpec(new byte[16]);
-            cipher.init(Cipher.DECRYPT_MODE, secretKey, ivparameterspec);
+            if(salArch == 0){
+                byte[] key = new byte[tamKey];
+                SecretKeySpec secretKey = new SecretKeySpec(key, ALGORITMO_DE_CIFRADO);                
+                cipher.init(Cipher.DECRYPT_MODE, secretKey, ivparameterspec);
+            }else{
+                byte[] key = ObtenerKeyArchivo("key_aes");
+                SecretKeySpec secretKey = new SecretKeySpec(key, ALGORITMO_DE_CIFRADO);                
+                cipher.init(Cipher.DECRYPT_MODE, secretKey, ivparameterspec);
+            }
+            
         
             byte[] txtplain;
             if(salArch==0){
@@ -237,10 +260,35 @@ public class AESJAVA {
                 fichero.write(key);
                 fichero.write("\n");
                 fichero.close();
+            }else if(modo == 4){
+                fichero = new FileWriter(name + ".key");
+                fichero.write(key);
+                fichero.write("\n");
+                fichero.close();
             }                                              
         } catch (Exception e) {
             System.out.println(e);;
         }
+    }
+    public static byte[] ObtenerKeyArchivo(String narch){
+
+        String texto = "";
+        String textoF = "";
+        try {                
+            File archivo = new File("./" + narch + ".key");
+            FileReader entrada = new FileReader(archivo);
+            BufferedReader br = new BufferedReader(entrada);               
+            while((texto=br.readLine())!=null){                    
+                textoF+=texto;
+            }
+            entrada.close();
+        } 
+        catch (IOException e) {
+            System.out.println("No se ha encontrado el archivo:" + e.getMessage());
+        }
+        Base64.Decoder decoder = Base64.getDecoder();        
+        System.out.println(Arrays.toString(decoder.decode(textoF)));
+        return decoder.decode(textoF);
     }
     public static void main(String[] args) throws IOException {                                
         pruebaDeVectores();       

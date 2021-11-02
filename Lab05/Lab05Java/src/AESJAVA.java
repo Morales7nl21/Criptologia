@@ -233,7 +233,7 @@ public class AESJAVA {
                 fichero.write("\n");
                 fichero.close();
             }else if(modo == 3){
-                fichero = new FileWriter("Decrypted_"+name + ".txt");
+                fichero = new FileWriter(name + ".dec");
                 fichero.write(key);
                 fichero.write("\n");
                 fichero.close();

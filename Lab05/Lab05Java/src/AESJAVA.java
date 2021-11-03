@@ -161,6 +161,7 @@ public class AESJAVA {
 
         String encyptStr = encrypt(plainT,16,0,0); //16,24,32
         String decryptStr  = decrypt(encyptStr,16,0,0);        
+        System.out.println("CBCGFSbox128.rsp");
         System.out.println("Texto en plano   : "+plainT);
         System.out.println("Texto encriptado : "+encyptStr);
         System.out.println("Texto descifrado : "+decryptStr);
@@ -169,13 +170,15 @@ public class AESJAVA {
         plainT = "1b077a6af4b7f98229de786d7516b639";
         encyptStr = encrypt(plainT,24,0,0); //16,24,32
         decryptStr  = decrypt(encyptStr,24,0,0);        
+        System.out.println("\nCBCGFSbox192.rsp");
         System.out.println("Texto en plano  : "+plainT);
         System.out.println("Texto encriptado: "+encyptStr);
         System.out.println("Texto descifrado: "+decryptStr);
         // Prueba con 256 con los vectores oficales de prueba
         plainT = "014730f80ac625fe84f026c60bfd547d";
         encyptStr = encrypt(plainT,32,1,0); //16,24,32 
-        decryptStr  = decrypt(encyptStr,32,1,0);        
+        decryptStr  = decrypt(encyptStr,32,1,0);       
+        System.out.println("\nCBCGFSbox256.rsp"); 
         System.out.println("Texto en plano  : "+plainT);
         System.out.println("Texto encriptado: "+encyptStr);
         System.out.println("Texto descifrado: "+decryptStr);
@@ -299,7 +302,7 @@ public class AESJAVA {
                 KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");        
                 keyGenerator.init( r1[i] *8);
                 SecretKey keyG = keyGenerator.generateKey();
-                System.out.println("key: \n" + Arrays.toString(keyG.getEncoded()));        
+                System.out.println("key para: " + String.valueOf(r1[i] *8) + "\n" + Arrays.toString(keyG.getEncoded()));        
                 Base64.Encoder encoder64 = Base64.getEncoder();
                 String key64 = encoder64.encodeToString(keyG.getEncoded());                
                 mandarArchivo(key64, "key_aes_" + String.valueOf(r1[i]*8), 4);    

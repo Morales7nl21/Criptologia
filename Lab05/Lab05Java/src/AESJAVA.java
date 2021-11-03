@@ -287,7 +287,7 @@ public class AESJAVA {
             System.out.println("No se ha encontrado el archivo:" + e.getMessage());
         }
         Base64.Decoder decoder = Base64.getDecoder();        
-        System.out.println(Arrays.toString(decoder.decode(textoF)));
+        //System.out.println(Arrays.toString(decoder.decode(textoF)));
         return decoder.decode(textoF);
     }
     public static void generarLlaves(){
@@ -318,8 +318,8 @@ public class AESJAVA {
         
         encryptArchivo("prueba1",1); // CFB
         decryptArchivo("prueba1",1);
-        encryptArchivo("prueba1",2); // CBC
-        decryptArchivo("prueba1",2);
+        //encryptArchivo("prueba1",2); // CBC
+        //decryptArchivo("prueba1",2);
 
     }   
 }

@@ -290,11 +290,34 @@ public class AESJAVA {
         System.out.println(Arrays.toString(decoder.decode(textoF)));
         return decoder.decode(textoF);
     }
-    public static void main(String[] args) throws IOException {                                
-        pruebaDeVectores();       
-        //encryptArchivo("prueba1",1); // CFB
-        //decryptArchivo("prueba1",1);
+    public static void generarLlaves(){
 
+        int[] r1 = {16,24,32};
+
+        for(int i = 0; i<3; i++){
+            try {
+                KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");        
+                keyGenerator.init( r1[i] *8);
+                SecretKey keyG = keyGenerator.generateKey();
+                System.out.println("key: \n" + Arrays.toString(keyG.getEncoded()));        
+                Base64.Encoder encoder64 = Base64.getEncoder();
+                String key64 = encoder64.encodeToString(keyG.getEncoded());                
+                mandarArchivo(key64, "key_aes_" + String.valueOf(r1[i]*8), 4);    
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            
+        }
+        
+    }
+    public static void main(String[] args) throws IOException {                                
+        
+        
+        generarLlaves(); // PUNTO 1
+        pruebaDeVectores(); // PUNTO 2
+        
+        encryptArchivo("prueba1",1); // CFB
+        decryptArchivo("prueba1",1);
         encryptArchivo("prueba1",2); // CBC
         decryptArchivo("prueba1",2);
 
